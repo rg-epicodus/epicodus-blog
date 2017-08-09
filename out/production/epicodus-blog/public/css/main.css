@@ -1,0 +1,18 @@
+input[type=text] {
+    background-color: #3CBC8D;
+    color: white;
+}
+
+body {
+    background-color: #3ffcbd;
+}
+
+.jumbotron {
+    background-color: #3CBC8D;
+
+}
+
+.well {
+    background-color: #3CBC8D;
+
+}

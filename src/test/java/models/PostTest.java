@@ -12,6 +12,15 @@ import static org.junit.Assert.*;
 
 public class PostTest {
 
+    @After
+    public void tearDown() throws Exception {
+        Post.clearAllPosts(); //clear out allll the posts before each test.
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
     @Test
     public void NewPostObjectGetsCorrectlyCreated_true() throws Exception{
         Post testPost = new Post("Day1: Intro");
@@ -24,24 +33,25 @@ public class PostTest {
         assertEquals("Day 1: Intro", testPost.getContent());
     }
 
-    @After
-    public void tearDown() {
-        Post.clearAllPosts(); //clear out allll the posts before each test.
-    }
-
     @Test
-    public void AllPostsAreCorrectlyReturned_true() {
+    public void AllPostsAreCorrectlyReturned_true() throws Exception {
         Post post = new Post("Day 1: Intro");
         Post otherPost = new Post ("How to pair successfully");
         assertEquals(2, Post.getAll().size());
     }
 
     @Test
-    public void AllPostsContainsAllPosts_true() {
+    public void AllPostsContainsAllPosts_true() throws Exception {
         Post post = new Post("Day 1: Intro");
         Post otherPost = new Post ("How to pair successfully");
         assertEquals(true, Post.getAll().contains(post));
         assertEquals(true, Post.getAll().contains(otherPost));
+    }
+
+    @Test
+    public void getPublished_isFalseAfterInstantiation_false() throws Exception {
+        Post myPost = new Post("Day 1:Intro");
+        assertEquals(false, myPost.getPublished()); //should never start as published
     }
 
 }

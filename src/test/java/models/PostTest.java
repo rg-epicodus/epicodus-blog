@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import models.Post;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 /**
@@ -53,5 +55,39 @@ public class PostTest {
         Post myPost = new Post("Day 1:Intro");
         assertEquals(false, myPost.getPublished()); //should never start as published
     }
+
+    @Test
+    public void getCreatedAt_instantiatesWithCurrentTime_today() throws Exception {
+        Post myPost = newPost();
+        assertEquals(LocalDateTime.now().getDayOfWeek(), myPost.getCreatedAt().getDayOfWeek());
+    }
+
+    @Test
+    public void getId_postInstantiatesWithAnID_1() throws Exception {
+        Post.clearAllPosts();
+        Post myPost = new Post("Day 1: Intro");
+        assertEquals(1, myPost.getId());
+    }
+
+    @Test
+    public void findReturnsCorrectPost() throws Exception {
+        Post post = newPost();
+        assertEquals(1, Post.findById(post.getId()).getId());
+    }
+
+    @Test
+    public void findReturnsCorrectPostWhenMoreThanOnePostExists() throws Exception {
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        assertEquals(2, Post.findById(otherPost.getId()).getId());
+    }
+
+
+
+    // helper
+        public Post newPost() {
+        return new Post("Day 1: Intro");
+    }
+
 
 }

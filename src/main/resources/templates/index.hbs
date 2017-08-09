@@ -7,7 +7,7 @@
        {{#each posts }} <!--loop-->
        <div class="well">
         <p>Current post:</p>
-        <p>{{ content }}</p> <!--show-->
+        <p>{{ content }}<a href="/posts/{{id}}"> read more...</a></p> <!--show-->
        </div>
        {{/each}}
    {{else}} <!--no posts!-->

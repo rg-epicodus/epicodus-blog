@@ -12,14 +12,16 @@ public class Post {
     private boolean published;
     private LocalDateTime createdAt;
     private int id;
+    private static int increment = 0;
 
 
     public Post(String content){
         this.content = content;
-        this.published = false;
         this.createdAt = LocalDateTime.now();
         instances.add(this);
-        this.id = instances.size();
+        increment++;
+        this.id = increment;
+        this.published = false;
     }
 
     public String getContent() {
@@ -48,10 +50,16 @@ public class Post {
     }
 
     public static Post findById(int id){
-        return instances.get(id-1);
+        Post test= null;
+        for (Post instance : instances) {
+            if (instance.getId() == id) {
+                test = instance;
+            }
+        }
+        return test;
     }
 
     public void deletePost(){
-        instances.remove(id-1);
+        instances.remove(Post.findById(id));
     }
 }

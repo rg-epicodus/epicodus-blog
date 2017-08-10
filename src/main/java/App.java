@@ -11,6 +11,13 @@ public class App {
     public static void main(String[] args) { //type “psvm + tab” to autocreate this :)
         staticFileLocation("/public");
 
+        //get: delete all posts
+        get("/posts/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Post.clearAllPosts();
+            return new ModelAndView(model, "success.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //get: show new post form
         get("/posts/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -34,12 +41,6 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //get: delete all posts
-        get("/posts/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            Post.clearAllPosts();
-            return new ModelAndView(model, "success.hbs");
-        }, new HandlebarsTemplateEngine());
 
         //get: show an individual post
         get("/posts/:id", (req, res) -> {

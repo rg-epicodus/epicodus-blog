@@ -96,6 +96,24 @@ public class PostTest {
         assertNotEquals(formerContent, post.getContent());
     }
 
+    @Test
+    public void deleteDeletesASpecificPost() throws Exception {
+        Post post = newPost();
+        Post otherPost = new Post("How to pair successfully");
+        post.deletePost();
+        assertEquals(1, Post.getAll().size()); //one is left
+        assertEquals(Post.getAll().get(0).getId(), 2); //the one that was deleted has the id of 2. Why do we care?
+    }
+
+    @Test
+    public void deleteAllPostsDeletesAllPosts() throws Exception {
+        Post post = newPost();
+        Post otherPost = newPost();
+
+        Post.clearAllPosts();
+        assertEquals(0, Post.getAll().size());
+    }
+
     // helper
         public Post newPost() {
         return new Post("Day 1: Intro");

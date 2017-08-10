@@ -82,7 +82,19 @@ public class PostTest {
         assertEquals(2, Post.findById(otherPost.getId()).getId());
     }
 
+    @Test
+    public void updateChangesPostContent() throws Exception {
+        Post post = newPost();
+        String formerContent = post.getContent();
+        LocalDateTime formerDate = post.getCreatedAt();
+        int formerId = post.getId();
 
+        post.update("Android: Day 40");
+
+        assertEquals(formerId, post.getId());
+        assertEquals(formerDate, post.getCreatedAt());
+        assertNotEquals(formerContent, post.getContent());
+    }
 
     // helper
         public Post newPost() {
